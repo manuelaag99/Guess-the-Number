@@ -16,7 +16,7 @@ export default function App() {
 		<LinearGradient colors={["#a6a", "#000", "#fb0"]} style={styles.rootStyles}>
 			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
 				{!userNumber && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-				{userNumber && <GameScreen guessedNumber={userNumber} />}
+				{userNumber && <GameScreen clearPickedNumber={() => setUserNumber()} guessedNumber={userNumber} />}
 			</ImageBackground>
 		</LinearGradient>
 	);

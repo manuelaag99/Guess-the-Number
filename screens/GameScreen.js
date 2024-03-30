@@ -1,17 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 
-export default function GameScreen ({ guessedNumber }) {
+export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
     const [numberOfRounds, setNumberOfRounds] = useState(1);
     function addRound () {
         setNumberOfRounds((prevValue) => prevValue + 1);
     }
 
+    const [guessedNumber, setGuessedNumber] = useState(Math.floor((Math.random() * 100) + 1));
+
+    console.log(guessedNumber)
     return (
         <View style={styles.screenStyles}>
             <View style={styles.containerStyles}>
-                <Text style={[styles.generalTextStyles, { fontSize: 40 }]}>
+                <Text style={styles.enteredNumberStyles}>
                     {guessedNumber}
                 </Text>
                 <Text style={styles.generalTextStyles}>
@@ -25,6 +28,11 @@ export default function GameScreen ({ guessedNumber }) {
                     <Text style={styles.generalTextStyles}>
                         {numberOfRounds} rounds
                     </Text>
+                    <Pressable>
+                        <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
+                            Go back.
+                        </Text>
+                    </Pressable>
                 </View>
             </View>
         </View>
@@ -43,8 +51,14 @@ const styles = StyleSheet.create({
         borderRadius: 9,
         elevation: 5,
         paddingHorizontal: 8,
-        paddingVertical: 12,
+        paddingVertical: 18,
         width: "100%"
+    },
+    enteredNumberStyles: {
+        color: "#fff",
+        fontWeight: "bold",
+        fontSize: 50,
+        textAlign: "center",
     },
     generalTextStyles: {
         color: "#fff",
@@ -52,6 +66,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
         marginVertical: 14
+    },
+    goBackStyles: {
+        color: "#fb0",
+        fontWeight: "bold",
+        fontSize: 18,
+        textAlign: "center",
     },
     buttonsContainerStyles: {
         width: "100%",
