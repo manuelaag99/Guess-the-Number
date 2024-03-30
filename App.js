@@ -11,12 +11,12 @@ export default function App() {
 	function pickedNumberHandler (enteredNumber) {
 		setUserNumber(enteredNumber);
 	}
-	
+
 	return (
 		<LinearGradient colors={["#a6a", "#000", "#fb0"]} style={styles.rootStyles}>
-			<ImageBackground imageStyle={{ opacity: 0.4 }} style={styles.rootStyles} source={require("./assets/images/background.png")} resizeMode="cover">
+			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
 				{!userNumber && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-				{userNumber && <GameScreen />}
+				{userNumber && <GameScreen guessedNumber={userNumber} />}
 			</ImageBackground>
 		</LinearGradient>
 	);
@@ -24,8 +24,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	rootStyles: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
+		flex: 1
 	},
+	imageBackgroundStyles: {
+		flex: 1
+	}
 });
