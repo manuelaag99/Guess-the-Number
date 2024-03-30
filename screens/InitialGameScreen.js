@@ -2,7 +2,7 @@ import { Alert, Pressable, StyleSheet, Text, TextInput, View } from "react-nativ
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 
-export default function InitialGameScreen () {
+export default function InitialGameScreen ({ setPickedNumber }) {
     const [enteredNumber, setEnteredNumber] = useState("");
 
     function numberInputHandler (enteredText) {
@@ -17,7 +17,7 @@ export default function InitialGameScreen () {
             ])
             return;
         } else {
-            console.log("valid number!")
+            setPickedNumber(enteredNumber);
         }
     }
 
