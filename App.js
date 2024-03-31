@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import InitialGameScreen from './screens/InitialGameScreen';
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from 'react';
@@ -15,8 +15,10 @@ export default function App() {
 	return (
 		<LinearGradient colors={["#a6a", "#000", "#fb0"]} style={styles.rootStyles}>
 			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
-				{!userNumber && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-				{userNumber && <GameScreen clearPickedNumber={() => setUserNumber()} guessedNumber={userNumber} />}
+				<SafeAreaView style={styles.rootStyles}>
+					{!userNumber && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
+					{userNumber && <GameScreen clearPickedNumber={() => setUserNumber()} guessedNumber={userNumber} />}
+				</SafeAreaView>
 			</ImageBackground>
 		</LinearGradient>
 	);
