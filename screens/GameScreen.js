@@ -3,15 +3,29 @@ import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
 
+function generateRandomNumber (max, min, exclude) {
+    const randomNumber = Math.floor(Math.random() * (max - min)) + min;
+    return randomNumber;
+}
+
+let minimumBoundary = 1;
+let maximumBoundary = 100;
 export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
+    const initialGuess = generateRandomNumber(maximumBoundary, minimumBoundary, enteredNumber);
     const [numberOfRounds, setNumberOfRounds] = useState(1);
-    function addRound () {
+    const [guessedNumber, setGuessedNumber] = useState(initialGuess);
+    
+    function nextGuessHandler (direction) {
+        if (direction === "higher") {
+            minimumBoundary = guessedNumber;
+        } else {
+            maximumBoundary = guessedNumber;
+        }
+        const newRandomNumber = generateRandomNumber(maximumBoundary, minimumBoundary, guessedNumber)
+        setGuessedNumber(newRandomNumber);
         setNumberOfRounds((prevValue) => prevValue + 1);
     }
 
-    const [guessedNumber, setGuessedNumber] = useState(Math.floor((Math.random() * 100) + 1));
-
-    console.log(guessedNumber)
     return (
         <View style={styles.screenStyles}>
             <View style={styles.containerStyles}>
@@ -22,12 +36,12 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
                     Is the number you entered higher or lower?
                 </Text>
                 <View style={styles.buttonsContainerStyles}>
-                    <PrimaryButton pressButtonAction={addRound}>Greater</PrimaryButton>
-                    <PrimaryButton>Lower</PrimaryButton>
+                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "higher")}>Higher</PrimaryButton>
+                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "lower")}>Lower</PrimaryButton>
                 </View>
                 <View style={{ width: "100%" }}>
                     <Text style={styles.generalTextStyles}>
-                        {numberOfRounds} rounds
+                        {numberOfRounds} guesses
                     </Text>
                     <Pressable>
                         <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
