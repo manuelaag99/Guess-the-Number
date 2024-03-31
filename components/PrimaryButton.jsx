@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text } from "react-native"
+import Colors from "../constants/colors"
 
 export default function PrimaryButton ({ children, pressButtonAction }) {
     return (
@@ -12,7 +13,7 @@ export default function PrimaryButton ({ children, pressButtonAction }) {
 
 const styles = StyleSheet.create({
     buttonStyle: {
-        backgroundColor: "#fb0",
+        backgroundColor: Colors.secondary400,
         width: "40%",
         justifyContent: "center",
         paddingVertical: 10,

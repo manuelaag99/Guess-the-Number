@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
+import Colors from "../constants/colors";
 
 export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
     const [numberOfRounds, setNumberOfRounds] = useState(1);
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     containerStyles: {
-        backgroundColor: "#a6a",
+        backgroundColor: Colors.primary400,
         borderRadius: 9,
         elevation: 5,
         paddingHorizontal: 8,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
         marginVertical: 14
     },
     goBackStyles: {
-        color: "#fb0",
+        color: Colors.secondary400,
         fontWeight: "bold",
         fontSize: 18,
         textAlign: "center",
