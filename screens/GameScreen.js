@@ -19,17 +19,13 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
     const [hasTheNumberBeenGuessed, setHasTheNumberBeenGuessed] = useState(false);
     
     function nextGuessHandler (direction) {
+        if ((direction === "higher" && (enteredNumber < guessedNumber)) || ((direction === "lower") && (enteredNumber > guessedNumber))) {
+            Alert.alert("Liar", "Dont lie")
+            return;
+        }
         if (direction === "higher") {
-            if (enteredNumber < guessedNumber) {
-                Alert.alert("Liar", "Dont lie")
-                return;
-            }
             minimumBoundary = guessedNumber + 1;
         } else {
-            if (enteredNumber > guessedNumber) {
-                Alert.alert("Liar", "Dont lie")
-                return;
-            }
             maximumBoundary = guessedNumber;
         }
         console.log("the guessed number was " + guessedNumber, ", the entered number was " + enteredNumber, minimumBoundary, maximumBoundary)
