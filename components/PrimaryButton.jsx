@@ -5,7 +5,7 @@ export default function PrimaryButton ({ additionalStyles, children, pressButton
     return (
         <Pressable onPress={pressButtonAction} android_ripple={{ color: "#f82" }} style={({ pressed }) => pressed ? [styles.buttonStyle, styles.pressedButtonStyle, additionalStyles] : [styles.buttonStyle, additionalStyles]}>
             <View style={styles.buttonViewStyle}>
-                <Text style={{ fontFamily: "bold-font", width: "100%", textAlign: "center", color: "#fff" }}>
+                <Text style={styles.buttonTextStyle}>
                     {children}
                 </Text>
             </View>
@@ -14,6 +14,13 @@ export default function PrimaryButton ({ additionalStyles, children, pressButton
 }
 
 const styles = StyleSheet.create({
+    buttonTextStyle: {
+        fontSize: 16,
+        fontFamily: "bold-font",
+        width: "100%",
+        textAlign: "center",
+        color: "#fff"
+    },
     buttonStyle: {
         backgroundColor: Colors.secondary400,
         justifyContent: "center",

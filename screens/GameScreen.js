@@ -16,6 +16,7 @@ let maximumBoundary = 100;
 export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOver }) {
     const initialGuess = generateRandomNumber(maximumBoundary, minimumBoundary, enteredNumber);
     const [numberOfRounds, setNumberOfRounds] = useState(1);
+    const [guesses, setGuesses] = useState([initialGuess])
     const [guessedNumber, setGuessedNumber] = useState(initialGuess);
     const [hasTheNumberBeenGuessed, setHasTheNumberBeenGuessed] = useState(false);
     
@@ -31,6 +32,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
         }
         const newRandomNumber = generateRandomNumber(maximumBoundary, minimumBoundary, guessedNumber)
         setGuessedNumber(newRandomNumber);
+        setGuesses(prevGuesses => [newRandomNumber, ...prevGuesses]);
         setNumberOfRounds((prevValue) => prevValue + 1);
     }
 
@@ -60,19 +62,29 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                         <Ionicons name="remove" size={26} />
                     </PrimaryButton>
                 </View>
+
+                <View style={{ marginVertical: 10, width: "100%" }}>
+                    {(numberOfRounds === 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
+                        {numberOfRounds} guess:
+                    </Text>}
+                    {(numberOfRounds > 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
+                        {numberOfRounds} guesses:
+                    </Text>}
+                    {guesses.map(guess => {
+                        return (<Text key={guess} style={styles.generalTextStyles} >
+                            {guess}
+                        </Text>)
+                    })}
+                </View>
+
                 <View style={{ width: "100%" }}>
-                    {(numberOfRounds === 1) && <Text style={styles.generalTextStyles}>
-                        {numberOfRounds} guess
-                    </Text>}
-                    {(numberOfRounds > 1) && <Text style={styles.generalTextStyles}>
-                        {numberOfRounds} guesses
-                    </Text>}
                     <Pressable>
                         <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
                             Go back.
                         </Text>
                     </Pressable>
                 </View>
+                
             </CardContainer>
         </View>
     )
@@ -95,8 +107,7 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontWeight: "bold",
         fontSize: 18,
-        textAlign: "center",
-        marginVertical: 14
+        textAlign: "center"
     },
     goBackStyles: {
         color: Colors.secondary400,
