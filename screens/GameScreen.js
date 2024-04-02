@@ -38,6 +38,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
         if (enteredNumber === guessedNumber) {
             Alert.alert("Guessed!", "The number has been guessed");
             setHasTheNumberBeenGuessed(true);
+            setGuessedNumber();
             gameIsOver();
         }
     }, [enteredNumber, guessedNumber])
@@ -52,10 +53,10 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                     Is the number you entered higher or lower?
                 </Text>
                 <View style={styles.buttonsContainerStyles}>
-                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "higher")}>
+                    <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "higher")}>
                         <Ionicons name="add" size={26} />
                     </PrimaryButton>
-                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "lower")}>
+                    <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "lower")}>
                         <Ionicons name="remove" size={26} />
                     </PrimaryButton>
                 </View>
@@ -83,14 +84,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 20
-    },
-    containerStyles: {
-        backgroundColor: Colors.primary400,
-        borderRadius: 9,
-        elevation: 5,
-        paddingHorizontal: 8,
-        paddingVertical: 18,
-        width: "100%"
     },
     enteredNumberStyles: {
         color: "#fff",

@@ -6,8 +6,12 @@ import { useState } from 'react';
 import GameScreen from './screens/GameScreen';
 import Colors from './constants/colors';
 import GameOverScreen from './screens/GameOverScreen';
+import { useFonts } from 'expo-font';
 
 export default function App() {
+	const [fontsLoaded] = useFonts({
+		"bold-font": require("./assets/fonts/bold-font-2023.ttf")
+	})
 	const [userNumber, setUserNumber] = useState();
 
 	function pickedNumberHandler (enteredNumber) {
@@ -20,17 +24,19 @@ export default function App() {
 		setIsGameOver(false);
 	}
 
-	return (
-		<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
-			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
-				<SafeAreaView style={styles.rootStyles}>
-					{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-					{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={() => setIsGameOver(true)} />}
-					{userNumber && isGameOver && <GameOverScreen returnToHomeScreen={resetGame} />}
-				</SafeAreaView>
-			</ImageBackground>
-		</LinearGradient>
-	);
+	if (fontsLoaded) {
+		return (
+			<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
+				<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
+					<SafeAreaView style={styles.rootStyles}>
+						{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
+						{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={() => setIsGameOver(true)} />}
+						{userNumber && isGameOver && <GameOverScreen returnToHomeScreen={resetGame} />}
+					</SafeAreaView>
+				</ImageBackground>
+			</LinearGradient>
+		);
+	}
 }
 
 const styles = StyleSheet.create({
