@@ -12,7 +12,7 @@ function generateRandomNumber (max, min, exclude) {
 
 let minimumBoundary = 1;
 let maximumBoundary = 100;
-export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
+export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOver }) {
     const initialGuess = generateRandomNumber(maximumBoundary, minimumBoundary, enteredNumber);
     const [numberOfRounds, setNumberOfRounds] = useState(1);
     const [guessedNumber, setGuessedNumber] = useState(initialGuess);
@@ -28,7 +28,6 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
         } else {
             maximumBoundary = guessedNumber;
         }
-        console.log("the guessed number was " + guessedNumber, ", the entered number was " + enteredNumber, minimumBoundary, maximumBoundary)
         const newRandomNumber = generateRandomNumber(maximumBoundary, minimumBoundary, guessedNumber)
         setGuessedNumber(newRandomNumber);
         setNumberOfRounds((prevValue) => prevValue + 1);
@@ -38,6 +37,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
         if (enteredNumber === guessedNumber) {
             Alert.alert("Guessed!", "The number has been guessed");
             setHasTheNumberBeenGuessed(true);
+            gameIsOver();
         }
     }, [enteredNumber, guessedNumber])
 
