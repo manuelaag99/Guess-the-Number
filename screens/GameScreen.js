@@ -1,4 +1,4 @@
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useEffect, useState } from "react";
 import Colors from "../constants/colors";
@@ -70,11 +70,9 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                     {(numberOfRounds > 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
                         {numberOfRounds} guesses:
                     </Text>}
-                    {guesses.map(guess => {
-                        return (<Text key={guess} style={styles.generalTextStyles} >
-                            {guess}
-                        </Text>)
-                    })}
+                    <FlatList data={guesses} keyExtractor={guess => guess} renderItem={({item}) => (<Text style={[styles.generalTextStyles, { marginVertical: 2 }]} >
+                        {item}
+                    </Text>)}/>
                 </View>
 
                 <View style={{ width: "100%" }}>
