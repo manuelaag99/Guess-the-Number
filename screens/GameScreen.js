@@ -3,6 +3,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import { useEffect, useState } from "react";
 import Colors from "../constants/colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import CardContainer from "../components/CardContainer";
 
 
 function generateRandomNumber (max, min, exclude) {
@@ -43,7 +44,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
 
     return (
         <View style={styles.screenStyles}>
-            <View style={styles.containerStyles}>
+            <CardContainer>
                 <Text style={styles.enteredNumberStyles}>
                     {guessedNumber}
                 </Text>
@@ -71,7 +72,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                         </Text>
                     </Pressable>
                 </View>
-            </View>
+            </CardContainer>
         </View>
     )
 }

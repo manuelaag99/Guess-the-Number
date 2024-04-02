@@ -2,6 +2,7 @@ import { Alert, Pressable, StyleSheet, Text, TextInput, View } from "react-nativ
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
+import CardContainer from "../components/CardContainer";
 
 export default function InitialGameScreen ({ setPickedNumber }) {
     const [enteredNumber, setEnteredNumber] = useState("");
@@ -27,36 +28,22 @@ export default function InitialGameScreen ({ setPickedNumber }) {
     }
     return (
         <View style={{ flex: 1,  justifyContent: "center", alignItems: "center", padding: 20 }}>
-            <View style={styles.containerStyles}>
+            <CardContainer>
                 <TextInput onChangeText={numberInputHandler} value={enteredNumber} maxLength={2} keyboardType="number-pad" autoCorrect={false} inputMode="numeric" style={styles.textInputStyles} />
                 <View style={{ justifyContent: "space-between", flexDirection: "row", width: "100%", marginTop: 10 }}>
-                    <PrimaryButton pressButtonAction={clearNumberInput}>
+                    <PrimaryButton additionalStyles={{ width: "40%" }} pressButtonAction={clearNumberInput}>
                         Reset
                     </PrimaryButton>
-                    <PrimaryButton pressButtonAction={confirmEnteredValue}>
+                    <PrimaryButton additionalStyles={{ width: "40%" }} pressButtonAction={confirmEnteredValue}>
                         Confirm
                     </PrimaryButton>
                 </View>
-            </View>
+            </CardContainer>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    containerStyles: {
-        alignItems: "center",
-        justifyContent: "center",
-        marginHorizontal: 30,
-        backgroundColor: Colors.primary400,
-        marginVertical: 15,
-        padding: 20,
-        borderRadius: 9,
-        elevation: 5,
-        shadowColor: "#000",
-        shadowOffset: { width: 2, height: 2 },
-        shadowRadius: 5,
-        shadowOpacity: 0.25
-    },
     textInputStyles: {
         width: 60,
         borderBottomWidth: 2,

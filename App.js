@@ -8,21 +8,25 @@ import Colors from './constants/colors';
 import GameOverScreen from './screens/GameOverScreen';
 
 export default function App() {
-	const [userNumber, setUserNumber] = useState(false);
+	const [userNumber, setUserNumber] = useState();
 
 	function pickedNumberHandler (enteredNumber) {
 		setUserNumber(enteredNumber);
 	}
 
 	const [isGameOver, setIsGameOver] = useState(false);
+	function resetGame () {
+		setUserNumber();
+		setIsGameOver(false);
+	}
 
 	return (
-		<LinearGradient colors={[Colors.primary400, "#000", Colors.secondary400]} style={styles.rootStyles}>
+		<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
 			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
 				<SafeAreaView style={styles.rootStyles}>
 					{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
 					{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={() => setIsGameOver(true)} />}
-					{userNumber && isGameOver && <GameOverScreen />}
+					{userNumber && isGameOver && <GameOverScreen returnToHomeScreen={resetGame} />}
 				</SafeAreaView>
 			</ImageBackground>
 		</LinearGradient>
