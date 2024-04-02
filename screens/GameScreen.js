@@ -27,10 +27,10 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
         setNumberOfRounds((prevValue) => prevValue + 1);
     }
 
-    console.log(enteredNumber, guessedNumber)
     useEffect(() => {
         if (enteredNumber === guessedNumber) {
             Alert.alert("Guessed!", "The number has been guessed");
+            setHasTheNumberBeenGuessed(true);
         }
     }, [enteredNumber, guessedNumber])
 
@@ -48,9 +48,12 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
                     <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "lower")}>Lower</PrimaryButton>
                 </View>
                 <View style={{ width: "100%" }}>
-                    <Text style={styles.generalTextStyles}>
+                    {(numberOfRounds === 1) && <Text style={styles.generalTextStyles}>
+                        {numberOfRounds} guess
+                    </Text>}
+                    {(numberOfRounds > 1) && <Text style={styles.generalTextStyles}>
                         {numberOfRounds} guesses
-                    </Text>
+                    </Text>}
                     <Pressable>
                         <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
                             Go back.
