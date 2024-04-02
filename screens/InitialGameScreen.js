@@ -18,7 +18,7 @@ export default function InitialGameScreen ({ setPickedNumber }) {
             ])
             return;
         } else {
-            setPickedNumber(enteredNumber);
+            setPickedNumber(chosenNumber);
         }
     }
 

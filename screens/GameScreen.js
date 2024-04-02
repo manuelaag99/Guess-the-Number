@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Colors from "../constants/colors";
 
 function generateRandomNumber (max, min, exclude) {
@@ -14,6 +14,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
     const initialGuess = generateRandomNumber(maximumBoundary, minimumBoundary, enteredNumber);
     const [numberOfRounds, setNumberOfRounds] = useState(1);
     const [guessedNumber, setGuessedNumber] = useState(initialGuess);
+    const [hasTheNumberBeenGuessed, setHasTheNumberBeenGuessed] = useState(false);
     
     function nextGuessHandler (direction) {
         if (direction === "higher") {
@@ -25,6 +26,13 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
         setGuessedNumber(newRandomNumber);
         setNumberOfRounds((prevValue) => prevValue + 1);
     }
+
+    console.log(enteredNumber, guessedNumber)
+    useEffect(() => {
+        if (enteredNumber === guessedNumber) {
+            Alert.alert("Guessed!", "The number has been guessed");
+        }
+    }, [enteredNumber, guessedNumber])
 
     return (
         <View style={styles.screenStyles}>

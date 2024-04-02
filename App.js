@@ -18,7 +18,7 @@ export default function App() {
 			<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
 				<SafeAreaView style={styles.rootStyles}>
 					{!userNumber && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-					{userNumber && <GameScreen clearPickedNumber={() => setUserNumber()} guessedNumber={userNumber} />}
+					{userNumber && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} />}
 				</SafeAreaView>
 			</ImageBackground>
 		</LinearGradient>
