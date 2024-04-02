@@ -2,6 +2,8 @@ import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useEffect, useState } from "react";
 import Colors from "../constants/colors";
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 function generateRandomNumber (max, min, exclude) {
     const randomNumber = Math.floor(Math.random() * (max - min)) + min;
@@ -18,10 +20,19 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
     
     function nextGuessHandler (direction) {
         if (direction === "higher") {
-            minimumBoundary = guessedNumber;
+            if (enteredNumber < guessedNumber) {
+                Alert.alert("Liar", "Dont lie")
+                return;
+            }
+            minimumBoundary = guessedNumber + 1;
         } else {
+            if (enteredNumber > guessedNumber) {
+                Alert.alert("Liar", "Dont lie")
+                return;
+            }
             maximumBoundary = guessedNumber;
         }
+        console.log("the guessed number was " + guessedNumber, ", the entered number was " + enteredNumber, minimumBoundary, maximumBoundary)
         const newRandomNumber = generateRandomNumber(maximumBoundary, minimumBoundary, guessedNumber)
         setGuessedNumber(newRandomNumber);
         setNumberOfRounds((prevValue) => prevValue + 1);
@@ -44,8 +55,12 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber }) {
                     Is the number you entered higher or lower?
                 </Text>
                 <View style={styles.buttonsContainerStyles}>
-                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "higher")}>Higher</PrimaryButton>
-                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "lower")}>Lower</PrimaryButton>
+                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "higher")}>
+                        <Ionicons name="add" size={26} />
+                    </PrimaryButton>
+                    <PrimaryButton pressButtonAction={nextGuessHandler.bind(this, "lower")}>
+                        <Ionicons name="remove" size={26} />
+                    </PrimaryButton>
                 </View>
                 <View style={{ width: "100%" }}>
                     {(numberOfRounds === 1) && <Text style={styles.generalTextStyles}>
