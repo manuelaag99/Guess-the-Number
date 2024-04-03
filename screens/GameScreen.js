@@ -5,6 +5,7 @@ import Colors from "../constants/colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CardContainer from "../components/CardContainer";
 import ListItem from "../components/ListItem";
+import Title from "../components/Title";
 
 
 function generateRandomNumber (max, min, exclude) {
@@ -48,7 +49,8 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
 
     return (
         <View style={styles.screenStyles}>
-            <View style={{ flex: 2, justifyContent: "center" }}>
+            <View style={{ flex: 2, justifyContent: "center", width: "100%" }}>
+                <Title title="Will your opponent guess the number?" />
                 <CardContainer>
                     <Text style={styles.enteredNumberStyles}>
                         {guessedNumber}

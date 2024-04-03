@@ -1,18 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import CardContainer from "../components/CardContainer";
 import PrimaryButton from "../components/PrimaryButton";
+import Title from "../components/Title";
 
 export default function GameOverScreen ({ returnToHomeScreen }) {
     return (
         <View style={styles.screenStyles}>
-            <CardContainer>
-                <Text>
-                    The game is oveeeeeeeeeeeeeeer.
-                </Text>
-                <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
-                    Return to home screeeeeen
-                </PrimaryButton>
-            </CardContainer>
+            <Title title="Your opponent has guessed the number!" />
+            <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
+                Return to home screen
+            </PrimaryButton>
         </View>
     )
 }

@@ -3,6 +3,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
 import CardContainer from "../components/CardContainer";
+import Title from "../components/Title";
 
 export default function InitialGameScreen ({ setPickedNumber }) {
     const [enteredNumber, setEnteredNumber] = useState("");
@@ -28,7 +29,11 @@ export default function InitialGameScreen ({ setPickedNumber }) {
     }
     return (
         <View style={{ flex: 1,  justifyContent: "center", alignItems: "center", padding: 20 }}>
+            <Title title="Welcome to the number guessing game!" />
             <CardContainer>
+                <Text style={styles.generalTextStyles}>
+                    Enter a number between 1 and 100 below.
+                </Text>
                 <TextInput onChangeText={numberInputHandler} value={enteredNumber} maxLength={2} keyboardType="number-pad" autoCorrect={false} inputMode="numeric" style={styles.textInputStyles} />
                 <View style={{ justifyContent: "space-between", flexDirection: "row", width: "100%", marginTop: 10 }}>
                     <PrimaryButton additionalStyles={{ width: "40%" }} pressButtonAction={clearNumberInput}>
@@ -54,5 +59,11 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 6,
         textAlign: "center"
+    },
+    generalTextStyles: {
+        color: "#fff",
+        fontSize: 14,
+        textAlign: "center",
+        fontWeight: "bold"
     }
 })
