@@ -1,9 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import Colors from "../constants/colors";
 
-export default function CardContainer ({ children }) {
+export default function CardContainer ({ additionalStyles, children }) {
     return (
-        <View style={styles.containerStyles}>
+        <View style={[styles.containerStyles, additionalStyles]}>
             {children}
         </View>
     )

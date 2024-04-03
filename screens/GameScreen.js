@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Colors from "../constants/colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CardContainer from "../components/CardContainer";
+import ListItem from "../components/ListItem";
 
 
 function generateRandomNumber (max, min, exclude) {
@@ -47,43 +48,47 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
 
     return (
         <View style={styles.screenStyles}>
-            <CardContainer>
-                <Text style={styles.enteredNumberStyles}>
-                    {guessedNumber}
-                </Text>
-                <Text style={styles.generalTextStyles}>
-                    Is the number you entered higher or lower?
-                </Text>
-                <View style={styles.buttonsContainerStyles}>
-                    <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "higher")}>
-                        <Ionicons name="add" size={26} />
-                    </PrimaryButton>
-                    <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "lower")}>
-                        <Ionicons name="remove" size={26} />
-                    </PrimaryButton>
-                </View>
+            <View style={{ flex: 2, justifyContent: "center" }}>
+                <CardContainer>
+                    <Text style={styles.enteredNumberStyles}>
+                        {guessedNumber}
+                    </Text>
+                    <Text style={styles.generalTextStyles}>
+                        Is the number you entered higher or lower?
+                    </Text>
+                    <View style={styles.buttonsContainerStyles}>
+                        <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "higher")}>
+                            <Ionicons name="add" size={26} />
+                        </PrimaryButton>
+                        <PrimaryButton additionalStyles={{ paddingHorizontal: 25 }} pressButtonAction={nextGuessHandler.bind(this, "lower")}>
+                            <Ionicons name="remove" size={26} />
+                        </PrimaryButton>
+                    </View>
 
-                <View style={{ marginVertical: 10, width: "100%" }}>
+                    
+
+                    <View style={{ width: "100%" }}>
+                        <Pressable>
+                            <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
+                                Go back.
+                            </Text>
+                        </Pressable>
+                    </View>
+                    
+                </CardContainer>
+            </View>
+            
+
+            <View style={{ marginVertical: 10, width: "100%", flex: 1 }}>
                     {(numberOfRounds === 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
                         {numberOfRounds} guess:
                     </Text>}
                     {(numberOfRounds > 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
                         {numberOfRounds} guesses:
                     </Text>}
-                    <FlatList data={guesses} keyExtractor={guess => guess} renderItem={({item}) => (<Text style={[styles.generalTextStyles, { marginVertical: 2 }]} >
-                        {item}
-                    </Text>)}/>
+                    <FlatList data={guesses} keyExtractor={guess => guess} renderItem={({item, index}) => {
+                        return (<ListItem guess={item} numberOfRound={index + 1} />)}}/>
                 </View>
-
-                <View style={{ width: "100%" }}>
-                    <Pressable>
-                        <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
-                            Go back.
-                        </Text>
-                    </Pressable>
-                </View>
-                
-            </CardContainer>
         </View>
     )
 }
