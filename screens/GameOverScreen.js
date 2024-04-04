@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import CardContainer from "../components/CardContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
@@ -6,6 +6,9 @@ import Title from "../components/Title";
 export default function GameOverScreen ({ numberOfGuesses, returnToHomeScreen, userNumber }) {
     return (
         <View style={styles.screenStyles}>
+            <View style={styles.imageContainerStyles}>
+                <Image style={styles.imageStyles} source={require("../assets/images/success.png")} />
+            </View>
             <Title title="Your opponent has guessed the number!" />
             <CardContainer>
                 <Text style={styles.generalTextStyles}>
@@ -15,7 +18,6 @@ export default function GameOverScreen ({ numberOfGuesses, returnToHomeScreen, u
                     Return to home screen
                 </PrimaryButton>
             </CardContainer>
-            
         </View>
     )
 }
@@ -33,5 +35,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: "center",
         marginBottom: 10
+    },
+    imageContainerStyles: {
+        overflow: "hidden",
+        borderRadius: 100,
+        elevation: 6,
+        marginVertical: 8
+    },
+    imageStyles: {
+        width: 200,
+        height: 200
     }
 })

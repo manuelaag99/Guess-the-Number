@@ -22,6 +22,11 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
     const [guessedNumber, setGuessedNumber] = useState(initialGuess);
     const [hasTheNumberBeenGuessed, setHasTheNumberBeenGuessed] = useState(false);
     
+    useEffect(() => {
+        minimumBoundary = 1;
+        maximumBoundary = 100;
+    }, [])
+    
     function nextGuessHandler (direction) {
         if ((direction === "higher" && (enteredNumber < guessedNumber)) || ((direction === "lower") && (enteredNumber > guessedNumber))) {
             Alert.alert("Liar", "Dont lie")
@@ -47,6 +52,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
         }
     }, [enteredNumber, guessedNumber])
 
+    console.log(maximumBoundary)
     return (
         <View style={styles.screenStyles}>
             <View style={{ flex: 2, justifyContent: "center", width: "100%" }}>
@@ -67,14 +73,10 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                         </PrimaryButton>
                     </View>
 
-                    
-
-                    <View style={{ width: "100%" }}>
-                        <Pressable>
-                            <Text onPress={clearPickedNumber} style={styles.goBackStyles}>
-                                Go back.
-                            </Text>
-                        </Pressable>
+                    <View style={{ width: "100%", justifyContent: "center", alignItems: "center", marginTop: 6 }}>
+                        <PrimaryButton additionalStyles={{ width: "84%" }} pressButtonAction={clearPickedNumber}>
+                            Go back
+                        </PrimaryButton>
                     </View>
                     
                 </CardContainer>

@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#fff"
     },
+    buttonViewStyle: {
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical: 10
+    },
     buttonStyle: {
         backgroundColor: Colors.secondary400,
         justifyContent: "center",
@@ -28,11 +33,6 @@ const styles = StyleSheet.create({
         borderRadius: 9,
         elevation: 10,
         marginTop: 10
-    },
-    buttonViewStyle: {
-        justifyContent: "center",
-        alignItems: "center",
-        paddingVertical: 10
     },
     pressedButtonStyle: {
         opacity: 30
