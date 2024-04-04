@@ -88,8 +88,8 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
                     {(numberOfRounds > 1) && <Text style={[styles.generalTextStyles, { marginVertical: 14 }]}>
                         {numberOfRounds} guesses:
                     </Text>}
-                    <FlatList data={guesses} keyExtractor={guess => guess} renderItem={({item, index}) => {
-                        return (<ListItem guess={item} numberOfRound={index + 1} />)}}/>
+                    <FlatList data={guesses} keyExtractor={item => item} renderItem={({item, index}) => {
+                        return (<ListItem guess={item} numberOfRound={numberOfRounds - index} />)}}/>
                 </View>
         </View>
     )
