@@ -3,13 +3,19 @@ import CardContainer from "../components/CardContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
 
-export default function GameOverScreen ({ returnToHomeScreen }) {
+export default function GameOverScreen ({ numberOfGuesses, returnToHomeScreen, userNumber }) {
     return (
         <View style={styles.screenStyles}>
             <Title title="Your opponent has guessed the number!" />
-            <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
-                Return to home screen
-            </PrimaryButton>
+            <CardContainer>
+                <Text style={styles.generalTextStyles}>
+                    After {numberOfGuesses} attempts, your opponent guessed that the number you entered was {userNumber}.
+                </Text>
+                <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
+                    Return to home screen
+                </PrimaryButton>
+            </CardContainer>
+            
         </View>
     )
 }
@@ -26,6 +32,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18,
         textAlign: "center",
-        marginVertical: 14
+        marginBottom: 10
     }
 })

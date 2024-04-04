@@ -43,7 +43,7 @@ export default function GameScreen ({ clearPickedNumber, enteredNumber, gameIsOv
             Alert.alert("Guessed!", "The number has been guessed");
             setHasTheNumberBeenGuessed(true);
             setGuessedNumber();
-            gameIsOver();
+            gameIsOver(numberOfRounds);
         }
     }, [enteredNumber, guessedNumber])
 

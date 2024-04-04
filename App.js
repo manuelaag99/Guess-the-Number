@@ -12,13 +12,18 @@ export default function App() {
 	const [fontsLoaded] = useFonts({
 		"bold-font": require("./assets/fonts/bold-font-2023.ttf")
 	})
-	const [userNumber, setUserNumber] = useState();
 
+	const [userNumber, setUserNumber] = useState();
 	function pickedNumberHandler (enteredNumber) {
 		setUserNumber(enteredNumber);
 	}
 
 	const [isGameOver, setIsGameOver] = useState(false);
+	const [guesses, setGuesses] = useState();
+	function gameOver (numberOfGuesses) {
+		setIsGameOver(true);
+		setGuesses(numberOfGuesses);
+	}
 	function resetGame () {
 		setUserNumber();
 		setIsGameOver(false);
@@ -30,8 +35,8 @@ export default function App() {
 				<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
 					<SafeAreaView style={styles.rootStyles}>
 						{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-						{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={() => setIsGameOver(true)} />}
-						{userNumber && isGameOver && <GameOverScreen returnToHomeScreen={resetGame} />}
+						{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={gameOver} />}
+						{userNumber && isGameOver && <GameOverScreen numberOfGuesses={guesses} returnToHomeScreen={resetGame} userNumber={userNumber} />}
 					</SafeAreaView>
 				</ImageBackground>
 			</LinearGradient>
