@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import CardContainer from "../components/CardContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
@@ -22,6 +22,8 @@ export default function GameOverScreen ({ numberOfGuesses, returnToHomeScreen, u
     )
 }
 
+const deviceWidth = Dimensions.get("window").width;
+
 const styles = StyleSheet.create({
     screenStyles: {
         flex: 1,
@@ -38,12 +40,14 @@ const styles = StyleSheet.create({
     },
     imageContainerStyles: {
         overflow: "hidden",
-        borderRadius: 100,
+        borderRadius: (deviceWidth > 380) ? 125 : 100,
         elevation: 6,
-        marginVertical: 8
+        marginVertical: 8,
+        width: (deviceWidth > 380) ? 250 : 200,
+        height: (deviceWidth > 380) ? 250 : 200
     },
     imageStyles: {
-        width: 200,
-        height: 200
+        width: "100%",
+        height: "100%"
     }
 })
