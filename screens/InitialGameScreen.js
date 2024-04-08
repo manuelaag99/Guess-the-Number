@@ -1,4 +1,4 @@
-import { Alert, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, TextInput, View, useWindowDimensions } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/colors";
@@ -27,8 +27,11 @@ export default function InitialGameScreen ({ setPickedNumber }) {
     function clearNumberInput () {
         setEnteredNumber("")
     }
+
+    const { width, height } = useWindowDimensions();
+
     return (
-        <View style={{ flex: 1,  justifyContent: "center", alignItems: "center", padding: 20 }}>
+        <View style={[styles.screenStyles, { paddingHorizontal: (width > 450) ? 145 : 20 }]}>
             <Title title="Welcome to the number guessing game!" />
             <CardContainer>
                 <Text style={styles.generalTextStyles}>
@@ -49,6 +52,12 @@ export default function InitialGameScreen ({ setPickedNumber }) {
 }
 
 const styles = StyleSheet.create({
+    screenStyles: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20
+    },
     textInputStyles: {
         width: 60,
         borderBottomWidth: 2,

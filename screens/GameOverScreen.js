@@ -1,24 +1,28 @@
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import CardContainer from "../components/CardContainer";
 import PrimaryButton from "../components/PrimaryButton";
 import Title from "../components/Title";
 
 export default function GameOverScreen ({ numberOfGuesses, returnToHomeScreen, userNumber }) {
+    const { width, height } = useWindowDimensions();
+
     return (
-        <View style={styles.screenStyles}>
-            <View style={styles.imageContainerStyles}>
-                <Image style={styles.imageStyles} source={require("../assets/images/success.png")} />
+        <ScrollView>
+            <View style={[styles.screenStyles, { paddingHorizontal: (width > 450) ? 145 : 20 }]}>
+                <View style={[styles.imageContainerStyles, { width: (deviceWidth > 380) ? 150 : 200 }, { height: (deviceWidth > 380) ? 150 : 200 }, { borderRadius: (deviceWidth > 380) ? 125 : 100 } ]}>
+                    <Image style={styles.imageStyles} source={require("../assets/images/success.png")} />
+                </View>
+                <Title title="Your opponent has guessed the number!" />
+                <CardContainer>
+                    <Text style={styles.generalTextStyles}>
+                        After {numberOfGuesses} attempts, your opponent guessed that the number you entered was {userNumber}.
+                    </Text>
+                    <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
+                        Return to home screen
+                    </PrimaryButton>
+                </CardContainer>
             </View>
-            <Title title="Your opponent has guessed the number!" />
-            <CardContainer>
-                <Text style={styles.generalTextStyles}>
-                    After {numberOfGuesses} attempts, your opponent guessed that the number you entered was {userNumber}.
-                </Text>
-                <PrimaryButton additionalStyles={{ paddingHorizontal: 20 }} pressButtonAction={returnToHomeScreen}>
-                    Return to home screen
-                </PrimaryButton>
-            </CardContainer>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20
+        paddingVertical: 20
     },
     generalTextStyles: {
         color: "#fff",
