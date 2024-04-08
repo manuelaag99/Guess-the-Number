@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 export default function Title ({ title }) {
+    
+    const { width, height } = useWindowDimensions();
+
     return (
         <View style={styles.containerStyles}>
             <Text style={styles.textStyles}>

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, Pressable, SafeAreaView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import InitialGameScreen from './screens/InitialGameScreen';
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from 'react';
@@ -28,12 +28,14 @@ export default function App() {
 		setUserNumber();
 		setIsGameOver(false);
 	}
+    
+    const { width, height } = useWindowDimensions();
 
 	if (fontsLoaded) {
 		return (
 			<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
 				<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
-					<SafeAreaView style={styles.rootStyles}>
+					<SafeAreaView style={[styles.rootStyles, { marginTop: (width > 450) ? 40 : 20 }]}>
 						{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
 						{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={gameOver} />}
 						{userNumber && isGameOver && <GameOverScreen numberOfGuesses={guesses} returnToHomeScreen={resetGame} userNumber={userNumber} />}
