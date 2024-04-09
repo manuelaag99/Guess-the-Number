@@ -6,7 +6,7 @@ export default function Title ({ title }) {
 
     return (
         <View style={styles.containerStyles}>
-            <Text style={styles.textStyles}>
+            <Text style={[styles.textStyles, { fontSize: (width > 380) ? 24 : 32 }]}>
                 {title}
             </Text>
         </View>
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     textStyles: {
         fontFamily: "bold-font",
         textAlign: "center",
-        fontSize: 32,
         color: "#fff",
         textShadowColor: "#000",
         textShadowRadius: 10,

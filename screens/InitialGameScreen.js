@@ -31,8 +31,8 @@ export default function InitialGameScreen ({ setPickedNumber }) {
     const { width, height } = useWindowDimensions();
 
     return (
-        <ScrollView style={styles.keyboardAvoidingViewStyles}>
-            <KeyboardAvoidingView style={styles.keyboardAvoidingViewStyles} behavior="position">
+        <ScrollView contentContainerStyle={styles.screenStyles}>
+            <KeyboardAvoidingView style={styles.screenStyles} behavior="position">
                 <View style={[styles.screenStyles, { paddingHorizontal: (width > 450) ? 145 : 20 }]}>
                     <Title title="Welcome to the number guessing game!" />
                     <CardContainer>
@@ -63,8 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
-        overflow: "hidden"
+        padding: 10
     },
     textInputStyles: {
         width: 60,
