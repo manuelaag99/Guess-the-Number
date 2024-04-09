@@ -33,15 +33,18 @@ export default function App() {
 
 	if (fontsLoaded) {
 		return (
-			<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
-				<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
-					<SafeAreaView style={[styles.rootStyles, { marginTop: (width > 450) ? 40 : 20 }]}>
-						{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
-						{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={gameOver} />}
-						{userNumber && isGameOver && <GameOverScreen numberOfGuesses={guesses} returnToHomeScreen={resetGame} userNumber={userNumber} />}
-					</SafeAreaView>
-				</ImageBackground>
-			</LinearGradient>
+			<>
+				<StatusBar style="light" backgroundColor='black' />
+				<LinearGradient colors={[Colors.primary400, Colors.secondary400]} style={styles.rootStyles}>
+					<ImageBackground imageStyle={{ opacity: 0.4 }} resizeMode="cover" source={require("./assets/images/background.png")} style={styles.imageBackgroundStyles}>
+						<SafeAreaView style={[styles.rootStyles, { marginTop: (width > 450) ? 40 : 20 }]}>
+							{!userNumber && !isGameOver && <InitialGameScreen setPickedNumber={pickedNumberHandler} />}
+							{userNumber && !isGameOver && <GameScreen clearPickedNumber={() => setUserNumber()} enteredNumber={userNumber} gameIsOver={gameOver} />}
+							{userNumber && isGameOver && <GameOverScreen numberOfGuesses={guesses} returnToHomeScreen={resetGame} userNumber={userNumber} />}
+						</SafeAreaView>
+					</ImageBackground>
+				</LinearGradient>
+			</>
 		);
 	}
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { Platform, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 
 export default function Title ({ title }) {
     
@@ -18,8 +18,11 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "center",
         alignContent: "center",
-        paddingHorizontal: 12,
-        marginVertical: 20
+        marginHorizontal: 12,
+        marginVertical: 20,
+        borderColor: "#fff",
+        borderWidth: Platform.select({ ios: 0, android: 2 }),
+        padding: 6
     },
     textStyles: {
         fontFamily: "bold-font",
